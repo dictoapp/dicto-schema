@@ -1,0 +1,656 @@
+{
+    "id": "corpus",
+    "title": "corpus",
+    "description": "Corpus used in dicto",
+    "$url": "http://json-schema.org/draft-06/schema#",
+    "type": "object",
+    "properties":
+    {
+        "type":
+        {
+            "type": "string",
+            "enum": ["dicto-corpus"],
+            "default": "dicto-corpus",
+            "editable": false
+        },
+        "metadata":
+        {
+            "description": "metadata of the corpus",
+            "type": "object",
+            "properties":
+            {
+                "id":
+                {
+                    "editable": false,
+                    "type": "string",
+                    "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                },
+                "createdAt":
+                {
+                    "type": "number",
+                    "description": "Absolute date creation date",
+                    "editable": false
+                },
+                "lastModifiedAt":
+                {
+                    "type": "number",
+                    "description": "Absolute date last modification date",
+                    "editable": false
+                },
+                "title":
+                {
+                    "type": "string",
+                    "description": "Title of the corpus",
+                    "default": ""
+                },
+                "creators":
+                {
+                    "type": "array",
+                    "description": "creators of the corpus",
+                    "default": [],
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "given":
+                            {
+                                "type": "string",
+                                "default": ""
+                            },
+                            "family":
+                            {
+                                "type": "string",
+                                "default": ""
+                            },
+                            "role":
+                            {
+                                "type": "string",
+                                "default": ""
+                            },
+                            "presentation":
+                            {
+                                "type": "string",
+                                "longString": true,
+                                "default": ""
+                            }
+                        }
+                    }
+                },
+                "description":
+                {
+                    "type": "string",
+                    "longString": true,
+                    "default": ""
+                }
+            }
+        },
+        "chunks":
+        {
+            "type": "object",
+            "description": "hashmap of chunks composing the corpus",
+            "default":
+            {},
+            "patternProperties":
+            {
+                "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}":
+                {
+                    "$ref": "#/definitions/chunk"
+                }
+            }
+        },
+        "medias":
+        {
+            "type": "object",
+            "description": "hashmap of medias composing the corpus",
+            "default":
+            {},
+            "patternProperties":
+            {
+                "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}":
+                {
+                    "$ref": "#/definitions/media"
+                }
+            }
+        },
+        "fields":
+        {
+            "type": "object",
+            "description": "hashmap of fields composing the corpus",
+            "default":
+            {},
+            "patternProperties":
+            {
+                "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}":
+                {
+                    "$ref": "#/definitions/field"
+                }
+            }
+        },
+        "tagCategories":
+        {
+            "type": "object",
+            "description": "hashmap of tagCategories composing the corpus",
+            "default":
+            {},
+            "patternProperties":
+            {
+                "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}":
+                {
+                    "$ref": "#/definitions/tagCategory"
+                }
+            }
+        },
+        "tags":
+        {
+            "type": "object",
+            "description": "hashmap of tags composing the corpus",
+            "default":
+            {},
+            "patternProperties":
+            {
+                "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}":
+                {
+                    "$ref": "#/definitions/tag"
+                }
+            }
+        },
+        "compositions":
+        {
+            "type": "object",
+            "description": "hashmap of compositions composing the corpus",
+            "default":
+            {},
+            "patternProperties":
+            {
+                "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}":
+                {
+                    "$ref": "#/definitions/composition"
+                }
+            }
+        }
+    },
+
+    "definitions":
+    {
+        "chunk":
+        {
+            "type": "object",
+            "properties":
+            {
+                "metadata":
+                {
+                    "id":
+                    {
+                        "type": "string",
+                        "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                    },
+                    "createdAt":
+                    {
+                        "type": "number",
+                        "description": "Absolute date creation date"
+                    },
+                    "lastModifiedAt":
+                    {
+                        "type": "number",
+                        "description": "Absolute date last modification date"
+                    },
+                    "mediaId":
+                    {
+                        "type": "string",
+                        "description": "id of the media attached to the chunk",
+                        "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                    }
+                },
+                "fields":
+                {
+                    "type": "object",
+                    "description": "fields data for the chunk",
+                    "patternProperties":
+                    {
+                        "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}":
+                        {
+                            "type": "string",
+                            "longString": true
+                        }
+                    }
+
+                },
+                "tags":
+                {
+                    "type": "array",
+                    "description": "chunk tags references",
+                    "items":
+                    {
+                        "type": "string",
+                        "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                    }
+                },
+                "x":
+                {
+                    "type": "number",
+                    "description": "chunk lateral position in chunk space"
+                },
+                "start":
+                {
+                    "type": "number",
+                    "description": "chunk start time in seconds"
+                },
+                "end":
+                {
+                    "type": "number",
+                    "description": "chunk end time in seconds"
+                }
+            }
+        },
+        "field":
+        {
+            "type": "object",
+            "properties":
+            {
+                "metadata":
+                {
+                    "id":
+                    {
+                        "type": "string",
+                        "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                    },
+                    "createdAt":
+                    {
+                        "type": "number",
+                        "description": "Absolute date creation date"
+                    },
+                    "lastModifiedAt":
+                    {
+                        "type": "number",
+                        "description": "Absolute date last modification date"
+                    }
+                },
+                "name":
+                {
+                    "type": "string",
+                    "description": "name of the field",
+                    "default": "default"
+                }
+            }
+        },
+        "media":
+        {
+            "type": "object",
+            "properties":
+            {
+                "metadata":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "title":
+                        {
+                            "editable": true,
+                            "type": "string",
+                            "description": "title given to the media",
+                            "default": ""
+                        },
+                        "description":
+                        {
+                            "editable": true,
+                            "type": "string",
+                            "longString": true,
+                            "default": ""
+                        },
+                        "id":
+                        {
+                            "editable": false,
+                            "type": "string",
+                            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                        },
+                        "createdAt":
+                        {
+                            "editable": false,
+                            "type": "number",
+                            "description": "Absolute date creation date"
+                        },
+                        "lastModifiedAt":
+                        {
+                            "editable": false,
+                            "type": "number",
+                            "description": "Absolute date last modification date"
+                        },
+
+                        "mediaUrl":
+                        {
+                            "editable": true,
+                            "type": "string",
+                            "description": "url of the media",
+                            "filePicker": true,
+                            "acceptExtensions": ["mp4", "ogg", "mp3"]
+                        },
+
+                        "mediaThumbnailUrl":
+                        {
+                            "editable": true,
+                            "type": "string",
+                            "filePicker": true,
+                            "description": "url of the media thumbnail"
+                        },
+
+                        "creators":
+                        {
+                            "type": "array",
+                            "description": "creators of the corpus",
+                            "default": [],
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "given":
+                                    {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "family":
+                                    {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "role":
+                                    {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "presentation":
+                                    {
+                                        "type": "string",
+                                        "longString": true,
+                                        "default": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "duration":
+                {
+                    "type": "number",
+                    "description": "duration of the media",
+                    "editable": false
+                }
+            }
+        },
+        "tagCategory":
+        {
+            "type": "object",
+            "properties":
+            {
+                "metadata":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "id":
+                        {
+                            "type": "string",
+                            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                        },
+                        "createdAt":
+                        {
+                            "type": "number",
+                            "description": "Absolute date creation date"
+                        },
+                        "lastModifiedAt":
+                        {
+                            "type": "number",
+                            "description": "Absolute date last modification date"
+                        }
+                    }
+                },
+                "name":
+                {
+                    "type": "string",
+                    "description": "name of the tag category",
+                    "default": "default"
+                },
+                "color":
+                {
+                    "type": "string",
+                    "description": "color of the category",
+                    "default": "#333"
+                }
+            }
+        },
+        "tag":
+        {
+            "type": "object",
+            "properties":
+            {
+                "metadata":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "id":
+                        {
+                            "type": "string",
+                            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                        },
+                        "createdAt":
+                        {
+                            "type": "number",
+                            "description": "Absolute date creation date"
+                        },
+                        "lastModifiedAt":
+                        {
+                            "type": "number",
+                            "description": "Absolute date last modification date"
+                        }
+                    }
+
+                },
+                "tagCategoryId":
+                {
+                    "type": "string",
+                    "description": "id of the category of the tag",
+                    "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                },
+                "name":
+                {
+                    "type": "string",
+                    "description": "name of the tag"
+                },
+                "description":
+                {
+                    "type": "string",
+                    "longString": true,
+                    "description": "description text attached to the tag"
+                },
+                "dates":
+                {
+                    "type": "object",
+                    "description": "timespan covered by the tag",
+                    "properties":
+                    {
+                        "start":
+                        {
+                            "type": "number"
+                        },
+                        "end":
+                        {
+                            "type": "number"
+                        }
+                    }
+                },
+                "location":
+                {
+                    "type": "object",
+                    "description": "geolocalization the tag",
+                    "properties":
+                    {
+                        "latitude":
+                        {
+                            "type": "number"
+                        },
+                        "longitude":
+                        {
+                            "type": "number"
+                        },
+                        "address":
+                        {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "composition":
+        {
+            "type": "object",
+            "properties":
+            {
+                "metadata":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "title":
+                        {
+                            "type": "string",
+                            "description": "title of the composition"
+                        },
+                        "id":
+                        {
+                            "type": "string",
+                            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+                            "editable": false
+                        },
+                        "createdAt":
+                        {
+                            "type": "number",
+                            "description": "Absolute date creation date",
+                            "editable": false
+                        },
+                        "lastModifiedAt":
+                        {
+                            "type": "number",
+                            "description": "Absolute date last modification date",
+                            "editable": false
+                        },
+                        "description":
+                        {
+                            "type": "string",
+                            "longString": true,
+                            "description": "description of the composition"
+                        },
+                        "creators":
+                        {
+                            "type": "array",
+                            "description": "creators of the composition",
+                            "default": [],
+                            "items":
+                            {
+                                "type": "object",
+                                "properties":
+                                {
+                                    "given":
+                                    {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "family":
+                                    {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "role":
+                                    {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "presentation":
+                                    {
+                                        "type": "string",
+                                        "longString": true,
+                                        "default": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary":
+                {
+                    "type": "array",
+                    "default": [],
+                    "description": "summary of the blocks composing the composition",
+                    "items":
+                    {
+                        "$ref": "#/definitions/compositionBlock"
+                    }
+                }
+            }
+        },
+        "compositionBlock":
+        {
+            "type": "object",
+            "properties":
+            {
+                "metadata":
+                {
+                    "id":
+                    {
+                        "type": "string",
+                        "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                    },
+                    "createdAt":
+                    {
+                        "type": "number",
+                        "description": "Absolute date creation date"
+                    },
+                    "lastModifiedAt":
+                    {
+                        "type": "number",
+                        "description": "Absolute date last modification date"
+                    }
+                },
+                "blockType":
+                {
+                    "type": "string",
+                    "description": "type of the block",
+                    "enum": ["comment", "chunk"],
+                    "default": "chunk"
+                },
+                "content":
+                {
+                    "type": "string",
+                    "description": "content of the block"
+                },
+                "asides":
+                {
+                    "type": "array",
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "type":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": []
+                },
+                "duration":
+                {
+                    "type": "number",
+                    "description": "optional duration for the block"
+                },
+                "activeFieldId":
+                {
+                    "type": "string",
+                    "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                }
+            }
+        }
+    }
+}
