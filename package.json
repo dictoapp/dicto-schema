@@ -1,6 +1,6 @@
 {
   "name": "dicto-schema",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "the json-schema of dicto corpora data",
   "main": "index.js",
   "scripts": {

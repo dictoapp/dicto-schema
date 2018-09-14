@@ -1,3 +1,3 @@
-const schema = require('corpus-schema.json');
+const schema = require('./corpus-schema.json');
 
 module.exports = schema;
